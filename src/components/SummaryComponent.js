@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 
 const SummarySection = styled.section`
   // position: relative;
-  flex-basis: 300px;
+  // flex-basis: 300px;
 
   @media (min-width: 851px) {
     border-left: 1px solid #ff8a0020;

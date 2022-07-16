@@ -9,10 +9,12 @@ const Text = styled.span`
   color: ${(props) => props.color || "#000"};
 `;
 
-const Delivery = styled.div`
-//   flex-grow: auto;
+const Div = styled.div`
   display: flex;
   flex-direction: column;
+  @media (min-width: 850px) {
+    flex-basis: 700px;
+  }
 `;
 
 const Item = styled.div`
@@ -49,15 +51,9 @@ const TextArea = styled.textarea`
   overflow: hidden;
 `;
 
-const FormLabel = styled.label`
-  display: block;
-  transition: 0.2s;
-  font-size: 1rem;
-`;
-
 const DeliveryComponent = () => {
   return (
-    <Delivery>
+    <Div>
       <Item width="110px">
         <span
           style={{ fontSize: "17px" }}
@@ -92,7 +88,7 @@ const DeliveryComponent = () => {
           <Input type="number" placeholder="Dropshipper phone Number"></Input>
         </div>
       </Item>
-    </Delivery>
+    </Div>
   );
 };
 
