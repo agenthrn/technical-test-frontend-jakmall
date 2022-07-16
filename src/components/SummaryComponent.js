@@ -2,21 +2,30 @@ import React from "react";
 import styled, { css } from "styled-components";
 
 const SummarySection = styled.section`
-//   position: relative;
-  border-left: 1px solid #ff8a0020;
-  width: 300px;
-  padding: 20px;
+  // position: relative;
+  flex-basis: 300px;
+
+  @media (min-width: 851px) {
+    border-left: 1px solid #ff8a0020;
+    padding: 20px;
+  }
 `;
 
 const CalculationSection = styled.div`
-  position: absolute;
   bottom: 20px;
   display: flex;
   flex-direction: column;
+  @media (min-width: 851px) {
+    position: absolute;
+  }
+  @media (max-width: 850px) {
+    margin-top: 20px;
+  }
 `;
 
 const Item = styled.div`
   display: flex;
+  flex-wrap: wrap;
   margin-bottom: 12px;
   ${(props) => {
     switch (props.direction) {
@@ -53,7 +62,7 @@ const Button = styled.button`
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 3px 5px 10px rgba(255, 138, 0, 0.2);
   border-radius: 2px;
-  padding: 20px 55px;
+  padding: 20px;
   cursor: pointer;
 
   &:hover {
@@ -86,7 +95,7 @@ const SummaryComponent = () => {
       </Item>
 
       <Divider />
-      
+
       <Item>
         <Text fontWeight="400">Payment method</Text>
         <Text fontWeight="500" fontSize="16px" color="#1BD97B">

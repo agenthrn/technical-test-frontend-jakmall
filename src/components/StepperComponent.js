@@ -2,22 +2,23 @@ import React from "react";
 import styled from "styled-components";
 
 const Stepper = styled.div`
-  width: 500px;
+  max-width: 500px;
   height: 70px;
   background-color: #fffae6;
   border-radius: 35px;
-  position: absolute;
   margin: 0 auto;
   padding: 0 20px;
   left: 0;
   right: 0;
-  top: -35px;
   z-index: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  @media (max-width: 700px) {
+  @media (min-width: 851px) {
+    top: -35px;
+    position: absolute;
+  }
+  @media (max-width: 850px) {
     width: 90%;
   }
   @media (max-width: 500px) {
@@ -33,7 +34,7 @@ const Text = styled.span`
   font-size: ${(props) => props.fontSize || "16px"};
   color: ${(props) => props.color || "#fff"};
 
-  @media (max-width: 700px) {
+  @media (max-width: 850px) {
     font-size: 12px;
   }
 `;
@@ -63,7 +64,7 @@ const StepperComponent = () => {
   return (
     <Stepper>
       {steps.map((step, index) => (
-        <>
+        <React.Fragment key={index}>
           <Item>
             <Dot color={index + 1 <= stepPosition ? "#FF8A00" : "#FF8A0080"}>
               <Text>{index + 1}</Text>
@@ -77,12 +78,12 @@ const StepperComponent = () => {
               style={{
                 color: index + 1 <= stepPosition ? "#FF8A00" : "#FF8A0080",
               }}
-              class="material-symbols-outlined"
+              className="material-symbols-outlined"
             >
               arrow_forward_ios
             </span>
           )}
-        </>
+        </React.Fragment>
       ))}
     </Stepper>
   );
