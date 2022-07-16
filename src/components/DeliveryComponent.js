@@ -1,55 +1,5 @@
 import React from "react";
-import styled, { css } from "styled-components";
-
-const Text = styled.span`
-  font-weight: ${(props) => props.fontWeight || 300};
-  font-family: ${(props) => props.fonfamily || "Inter"}, sans-serif;
-  font-style: normal;
-  font-size: ${(props) => props.fontSize || "14px"};
-  color: ${(props) => props.color || "#000"};
-`;
-
-const Div = styled.div`
-  display: flex;
-  flex-direction: column;
-  @media (min-width: 850px) {
-    flex-basis: 700px;
-  }
-`;
-
-const Item = styled.div`
-  display: flex;
-  gap: 12px;
-  flex-direction: row;
-  justify-content: space-between;
-  ${(props) => props.width && `width: ${props.width}`}
-  ${(props) => props.alignItems && `align-items: ${props.alignItems}`}
-  ${(props) =>
-    props.responsive &&
-    css`
-      @media (max-width: 850px) {
-        flex-direction: column;
-      }
-    `}
-`;
-
-const Input = styled.input`
-  border: 1px solid #cccccc;
-  padding: 20px;
-  box-sizing: border-box;
-  width: 100%;
-  margin-bottom: 10px;
-`;
-
-const TextArea = styled.textarea`
-  resize: none;
-  border: 1px solid #cccccc;
-  padding: 20px;
-  box-sizing: border-box;
-  width: 100%;
-  margin-bottom: 10px;
-  overflow: hidden;
-`;
+import { Div, Item, Text, Input, TextArea } from "../Style";
 
 const DeliveryComponent = () => {
   return (

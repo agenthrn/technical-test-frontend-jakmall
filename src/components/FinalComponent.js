@@ -1,40 +1,5 @@
 import React from "react";
-import styled, { css } from "styled-components";
-
-const Text = styled.span`
-  font-weight: ${(props) => props.fontWeight || 300};
-  font-family: ${(props) => props.fonfamily || "Inter"}, sans-serif;
-  font-style: normal;
-  font-size: ${(props) => props.fontSize || "14px"};
-  color: ${(props) => props.color || "#000"};
-  ${(props) => props.margin && `margin: ${props.margin}`}
-`;
-
-const Div = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  @media (min-width: 850px) {
-    flex-basis: 700px;
-  }
-`;
-
-const Item = styled.div`
-  display: flex;
-  gap: ${(props) => props.gap || "12px"};
-  flex-direction: ${(props) => props.direction || "row"};
-  justify-content: space-between;
-  ${(props) => props.width && `width: ${props.width}`}
-  ${(props) => props.alignItems && `align-items: ${props.alignItems}`}
-  ${(props) =>
-    props.responsive &&
-    css`
-      @media (max-width: 850px) {
-        flex-direction: column;
-      }
-    `}
-`;
+import { Div, Item, Text } from "../Style";
 
 const FinalComponent = () => {
   return (
