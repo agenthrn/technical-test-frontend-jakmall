@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import DeliveryComponent from "../components/DeliveryComponent";
+import FinalComponent from "../components/FinalComponent";
 import ShipmentPaymentComponent from "../components/ShipmentPaymentComponent";
 import StepperComponent from "../components/StepperComponent";
 import SummaryComponent from "../components/SummaryComponent";
@@ -37,7 +38,7 @@ const OrderPageBody = styled.div`
 `;
 
 const OrderPage = () => {
-  const stepPosition = 2;
+  const stepPosition = 3;
 
   return (
     <OrderPageWrapper>
@@ -45,8 +46,10 @@ const OrderPage = () => {
         <StepperComponent />
         {stepPosition === 1 ? (
           <DeliveryComponent />
-        ) : (
+        ) : stepPosition === 2 ? (
           <ShipmentPaymentComponent />
+        ) : (
+          <FinalComponent />
         )}
         <SummaryComponent />
       </OrderPageBody>
