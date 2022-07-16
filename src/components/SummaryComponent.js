@@ -2,7 +2,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 
 const SummarySection = styled.section`
-  position: relative;
+//   position: relative;
   border-left: 1px solid #ff8a0020;
   width: 300px;
   padding: 20px;
@@ -13,7 +13,6 @@ const CalculationSection = styled.div`
   bottom: 20px;
   display: flex;
   flex-direction: column;
-  width: 100%;
 `;
 
 const Item = styled.div`

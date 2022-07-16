@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import StepperComponent from "../components/StepperComponent";
 import SummaryComponent from "../components/SummaryComponent";
 
 const OrderPageWrapper = styled.div`
@@ -21,13 +22,22 @@ const OrderPageBody = styled.div`
   box-shadow: 2px 10px 20px rgba(255, 138, 0, 0.1);
   border-radius: 4px;
   display: flex;
-  flex-basis: auto;
+  padding:20px;
+
+  @media (max-width: 1100px) {
+    width: 90%;
+    height: 80%;
+  }
+  @media (max-width: 700px) {
+    flex-direction: column;
+  }
 `;
 
 const OrderPage = () => {
   return (
     <OrderPageWrapper>
       <OrderPageBody>
+        <StepperComponent />
         <p>cek</p>
         <SummaryComponent />
       </OrderPageBody>
