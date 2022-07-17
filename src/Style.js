@@ -63,7 +63,7 @@ export const Div = styled.div`
 export const Item = styled.div`
   display: flex;
   gap: 12px;
-  flex-direction: row;
+  flex-direction: ${(props) => props.direction || "row"};
   justify-content: space-between;
   ${(props) => props.width && `width: ${props.width}`}
   ${(props) => props.alignItems && `align-items: ${props.alignItems}`}

@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
+import DataContext from "../context/DataContext";
 import { Stepper, ItemStepper, StepperText, Dot } from "../Style";
 
 const StepperComponent = () => {
+  const { getData, stepPosition, setStepper } = useContext(DataContext);
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   const steps = ["Delivery", "Payment", "Finish"];
-  const stepPosition = 2;
   return (
     <Stepper>
       {steps.map((step, index) => (

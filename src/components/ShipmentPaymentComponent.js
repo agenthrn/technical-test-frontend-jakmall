@@ -1,31 +1,56 @@
-import React, { useState } from "react";
-import { Div, Item, Text, Grid, Card, RadioButton, RadioButtonLabel } from "../Style";
+import React, { useState, useEffect, useContext } from "react";
+import DataContext from "../context/DataContext";
+import {
+  Div,
+  Item,
+  Text,
+  Grid,
+  Card,
+  RadioButton,
+  RadioButtonLabel,
+} from "../Style";
 
 const ShipmentPaymentComponent = () => {
+  const {
+    getData,
+    setStepper,
+    setShipment,
+    shipmentName,
+    setPayment,
+    paymentName,
+  } = useContext(DataContext);
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   const courier = [
-    { name: "GO-SEND", price: 50000 },
-    { name: "JNE", price: 9000 },
-    { name: "Personal Courier", price: 29000 },
+    { name: "GO-SEND", price: 50000, duration: "Today" },
+    { name: "JNE", price: 9000, duration: "2 days" },
+    { name: "Personal Courier", price: 29000, duration: "1 day" },
   ];
   const payment = [
     { name: "e-Wallet", value: 15000000 },
     { name: "Bank Transfer", value: null },
     { name: "Virtual Account", value: null },
   ];
-  const [selectCourier, setSelectCourier] = useState("GO-SEND");
-  const [selectPayment, setSelectPayment] = useState("e-Wallet");
   const handleSelectChange = (event) => {
     const value = event.target.value;
     const name = event.target.name;
     if (name === "radioCourier") {
-      setSelectCourier(value);
+      const courierData = courier.filter((el) => el.name === value)[0];
+      setShipment({
+        shipmentName: value,
+        shipmentCost: courierData["price"],
+        shipmentDuration: courierData["duration"],
+      });
     } else {
-      setSelectPayment(value);
+      setPayment(value);
     }
   };
   return (
     <Div>
-      <Item width="140px">
+      <Item onClick={() => setStepper(1)} width="140px">
         <span
           style={{ fontSize: "17px" }}
           className="material-symbols-outlined"
@@ -55,7 +80,7 @@ const ShipmentPaymentComponent = () => {
               type="radio"
               name="radioCourier"
               value={courier.name}
-              checked={selectCourier === courier.name}
+              checked={shipmentName === courier.name}
               onChange={(event) => handleSelectChange(event)}
             />
             <RadioButtonLabel />
@@ -84,7 +109,7 @@ const ShipmentPaymentComponent = () => {
               type="radio"
               name="radioPayment"
               value={payment.name}
-              checked={selectPayment === payment.name}
+              checked={paymentName === payment.name}
               onChange={(event) => handleSelectChange(event)}
             />
             <RadioButtonLabel />

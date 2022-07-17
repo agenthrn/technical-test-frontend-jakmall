@@ -10,7 +10,17 @@ import {
 } from "../Style";
 
 const SummaryComponent = () => {
-  const { getData, stepPosition, setStepper } = useContext(DataContext);
+  const {
+    getData,
+    stepPosition,
+    setStepper,
+    shipmentName,
+    shipmentCost,
+    shipmentDuration,
+    paymentName,
+    isDropshipper,
+    productCost,
+  } = useContext(DataContext);
 
   useEffect(() => {
     getData();
@@ -32,39 +42,49 @@ const SummaryComponent = () => {
 
       {stepPosition && stepPosition === 2 && (
         <>
-          <Divider />
+          {shipmentName && (
+            <>
+              <Divider />
 
-          <ItemSummary>
-            <Text fontWeight="400">Delivery estimation</Text>
-            <Text fontWeight="500" fontSize="16px" color="#1BD97B">
-              today by GO-SEND
-            </Text>
-          </ItemSummary>
+              <ItemSummary>
+                <Text fontWeight="400">Delivery estimation</Text>
+                <Text fontWeight="500" fontSize="16px" color="#1BD97B">
+                  {shipmentDuration} by {shipmentName}
+                </Text>
+              </ItemSummary>
+            </>
+          )}
 
-          <Divider />
-
-          <ItemSummary>
-            <Text fontWeight="400">Payment method</Text>
-            <Text fontWeight="500" fontSize="16px" color="#1BD97B">
-              Bank Transfer
-            </Text>
-          </ItemSummary>
+          {paymentName && (
+            <>
+              <Divider />
+              <ItemSummary>
+                <Text fontWeight="400">Payment method</Text>
+                <Text fontWeight="500" fontSize="16px" color="#1BD97B">
+                  {paymentName}
+                </Text>
+              </ItemSummary>
+            </>
+          )}
         </>
       )}
 
       <CalculationSection>
         <ItemSummary direction="row">
           <Text>Cost of goods</Text>
-          <Text fontWeight="700">500000</Text>
+          <Text fontWeight="700">{productCost}</Text>
         </ItemSummary>
         <ItemSummary direction="row">
           <Text>Dropshipping Fee</Text>
-          <Text fontWeight="700">5800</Text>
+          <Text fontWeight="700">{isDropshipper ? 5800 : 0}</Text>
         </ItemSummary>
-        <ItemSummary direction="row">
-          <Text>GO-SEND shipment</Text>
-          <Text fontWeight="700">15000</Text>
-        </ItemSummary>
+        {shipmentName && (
+          <ItemSummary direction="row">
+            <Text>{shipmentName} shipment</Text>
+            <Text fontWeight="700">{shipmentCost}</Text>
+          </ItemSummary>
+        )}
+
         <ItemSummary direction="row">
           <Text
             fontFamily="Montserrat"
@@ -80,7 +100,7 @@ const SummaryComponent = () => {
             fontSize="24px"
             fontWeight="700"
           >
-            500000
+            {shipmentCost + (isDropshipper ? 5800 : 0) + productCost}
           </Text>
         </ItemSummary>
         {stepPosition && stepPosition === 1 ? (
@@ -89,12 +109,14 @@ const SummaryComponent = () => {
               Continue to Payment
             </Text>
           </Button>
-        ) : (
-          <Button>
+        ) : stepPosition === 2 ? (
+          <Button onClick={() => paymentName && shipmentName && setStepper(3)}>
             <Text color="#fff" fontSize="18px" fontWeight="500">
-              Pay with e-Wallet
+              {paymentName ? `Pay with ${paymentName}` : "Select Payment First"}
             </Text>
           </Button>
+        ) : (
+          <></>
         )}
       </CalculationSection>
     </SummarySection>

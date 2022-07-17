@@ -16,6 +16,11 @@ const DataState = ({ children }) => {
     isDropshipper: false,
     dropshipName: "",
     dropshipPhoneNumber: "",
+    shipmentCost: 0,
+    shipmentName: "",
+    shipmentDuration: "",
+    paymentName: "",
+    productCost: 500000
   };
 
   // Dispatch the reducer
@@ -33,7 +38,35 @@ const DataState = ({ children }) => {
   };
 
   const setStepper = (payload) => {
+    //get from localstorage here
+    const data = JSON.parse(localStorage.getItem("deliveryData"));
+    data["stepPosition"] = payload;
+    //set to localstorage here
+    localStorage.setItem("deliveryData", JSON.stringify(data));
+    //dispatch
     dispatch({ type: "SET_STEPPER", payload });
+  };
+
+  const setShipment = ({ ...payload }) => {
+    //get from localstorage here
+    const data = JSON.parse(localStorage.getItem("deliveryData"));
+    data["shipmentName"] = payload.shipmentName;
+    data["shipmentCost"] = payload.shipmentCost;
+    data["shipmentDuration"] = payload.shipmentDuration;
+    //set to localstorage here
+    localStorage.setItem("deliveryData", JSON.stringify(data));
+    //dispatch
+    dispatch({ type: "SET_SHIPMENT", payload });
+  };
+
+  const setPayment = (payload) => {
+    //get from localstorage here
+    const data = JSON.parse(localStorage.getItem("deliveryData"));
+    data["paymentName"] = payload;
+    //set to localstorage here
+    localStorage.setItem("deliveryData", JSON.stringify(data));
+    //dispatch
+    dispatch({ type: "SET_PAYMENT", payload });
   };
 
   const getData = () => {
@@ -49,6 +82,8 @@ const DataState = ({ children }) => {
         ...state,
         setDelivery,
         setStepper,
+        setShipment,
+        setPayment,
         getData,
       }}
     >
