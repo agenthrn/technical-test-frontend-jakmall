@@ -20,6 +20,7 @@ const SummaryComponent = () => {
     paymentName,
     isDropshipper,
     productCost,
+    errorFormDelivery,
   } = useContext(DataContext);
 
   useEffect(() => {
@@ -104,15 +105,26 @@ const SummaryComponent = () => {
           </Text>
         </ItemSummary>
         {stepPosition && stepPosition === 1 ? (
-          <Button onClick={() => setStepper(2)}>
+          <Button
+            onClick={() =>
+              errorFormDelivery &&
+              Object.entries(errorFormDelivery).length === 0 &&
+              setStepper(2)
+            }
+          >
             <Text color="#fff" fontSize="18px" fontWeight="500">
-              Continue to Payment
+              {errorFormDelivery &&
+              Object.entries(errorFormDelivery).length === 0
+                ? "Continue to Payment"
+                : "Complete Form First"}
             </Text>
           </Button>
         ) : stepPosition === 2 ? (
           <Button onClick={() => paymentName && shipmentName && setStepper(3)}>
             <Text color="#fff" fontSize="18px" fontWeight="500">
-              {paymentName ? `Pay with ${paymentName}` : "Select Payment First"}
+              {paymentName === "" || shipmentName === ""
+                ? "Select Shipment / Payment First"
+                : `Pay with ${paymentName}`}
             </Text>
           </Button>
         ) : (

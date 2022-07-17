@@ -19,7 +19,17 @@ const DataReducer = (state, action) => {
         ...state,
         paymentName: payload,
       };
-    case "INSERT_DELIVERY":
+    case "SET_DELIVERY":
+      return {
+        ...state,
+        ...payload,
+      };
+    case "SET_ERROR_DELIVERY":
+      return {
+        ...state,
+        errorFormDelivery: payload,
+      };
+    case "RESET_DATA":
       return {
         ...state,
         ...payload,

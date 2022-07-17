@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { useForm } from "react-hook-form";
 import DataContext from "../context/DataContext";
 import { Div, Item, Text, Input, TextArea } from "../Style";
@@ -13,13 +13,13 @@ const DeliveryComponent = () => {
     dropshipName,
     dropshipPhoneNumber,
     setDelivery,
+    setErrorFormDelivery,
   } = useContext(DataContext);
 
   const {
     register,
     watch,
     trigger,
-    reset,
     setValue,
     formState: { errors },
   } = useForm({
@@ -34,6 +34,8 @@ const DeliveryComponent = () => {
     setValue("dropshipName", dropshipName);
     setValue("dropshipPhoneNumber", dropshipPhoneNumber);
     setValue("isDropshipper", isDropshipper);
+    trigger();
+    setErrorFormDelivery(errors);
   }, [
     email,
     phoneNumber,
@@ -41,14 +43,12 @@ const DeliveryComponent = () => {
     dropshipName,
     dropshipPhoneNumber,
     isDropshipper,
+    trigger,
+    errors,
   ]);
 
   useEffect(() => {
-    trigger();
-  }, [trigger, isDropshipper]);
-
-  useEffect(() => {
-    const subscription = watch((value, { name, type }) => {
+    const subscription = watch((value) => {
       setDelivery(value);
     });
     return () => subscription.unsubscribe();
@@ -80,11 +80,9 @@ const DeliveryComponent = () => {
             type="checkbox"
             name="isDropshipper"
             id="isDropshipper"
-            // onChange={(e) => handleDropship(e)}
-            // checked={isDropshipper}
             {...register("isDropshipper")}
           />
-          <label htmlFor="isDropshipper">Send as dropshipper</label>
+          <Text htmlFor="isDropshipper">Send as dropshipper</Text>
         </Item>
       </Item>
       <Item responsive>
@@ -120,7 +118,11 @@ const DeliveryComponent = () => {
             rows="5"
             placeholder="Delivery address"
           ></TextArea>
-          <Text>Sisa karakter : {120 - watch("address")?.length}</Text>
+          <Text>
+            {watch("address")?.length <= 120
+              ? `Sisa karakter : ${120 - watch("address")?.length}`
+              : "Karakter harus kurang dari 120"}{" "}
+          </Text>
         </div>
         <div>
           <Input

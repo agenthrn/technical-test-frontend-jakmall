@@ -21,10 +21,15 @@ const DataState = ({ children }) => {
     shipmentDuration: "",
     paymentName: "",
     productCost: 500000,
+    errorFormDelivery: {},
   };
 
   // Dispatch the reducer
   const [state, dispatch] = useReducer(DataReducer, initialState);
+
+  const setErrorFormDelivery = (payload) => {
+    dispatch({ type: "SET_ERROR_DELIVERY", payload });
+  };
 
   const setDelivery = (payload) => {
     if (!payload.isDropshipper) {
@@ -34,7 +39,7 @@ const DataState = ({ children }) => {
     //set to localstorage here
     localStorage.setItem("deliveryData", JSON.stringify(payload));
     //dispatch
-    dispatch({ type: "INSERT_DELIVERY", payload });
+    dispatch({ type: "SET_DELIVERY", payload });
   };
 
   const setStepper = (payload) => {
@@ -48,6 +53,7 @@ const DataState = ({ children }) => {
       order();
     } else if (payload === "reset") {
       localStorage.removeItem("deliveryData");
+      dispatch({ type: "RESET_DATA", payload: initialState });
       payload = 1;
     }
     //dispatch
@@ -107,6 +113,7 @@ const DataState = ({ children }) => {
       value={{
         ...state,
         setDelivery,
+        setErrorFormDelivery,
         setStepper,
         setShipment,
         setPayment,

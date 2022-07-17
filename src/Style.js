@@ -228,22 +228,20 @@ export const Dot = styled.div`
 `;
 
 export const SummarySection = styled.section`
-  // position: relative;
-  // flex-basis: 300px;
-
+  display: flex;
+  flex-direction: column;
+  flex: 1;
   @media (min-width: 851px) {
     border-left: 1px solid #ff8a0020;
     padding: 20px;
+    box-sizing: border-box;
   }
 `;
 
 export const CalculationSection = styled.div`
-  bottom: 20px;
+  margin-top: auto;
   display: flex;
   flex-direction: column;
-  @media (min-width: 851px) {
-    position: absolute;
-  }
   @media (max-width: 850px) {
     margin-top: 20px;
   }

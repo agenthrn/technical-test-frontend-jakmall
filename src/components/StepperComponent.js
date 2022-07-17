@@ -3,7 +3,7 @@ import DataContext from "../context/DataContext";
 import { Stepper, ItemStepper, StepperText, Dot } from "../Style";
 
 const StepperComponent = () => {
-  const { getData, stepPosition, setStepper } = useContext(DataContext);
+  const { getData, stepPosition } = useContext(DataContext);
 
   useEffect(() => {
     getData();
