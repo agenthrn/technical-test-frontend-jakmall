@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
+import DataContext from "../context/DataContext";
 import {
   SummarySection,
   ItemSummary,
@@ -9,6 +10,12 @@ import {
 } from "../Style";
 
 const SummaryComponent = () => {
+  const { getData, stepPosition, setStepper } = useContext(DataContext);
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <SummarySection>
       <ItemSummary>
@@ -23,23 +30,27 @@ const SummaryComponent = () => {
         <Text>10 items purchased</Text>
       </ItemSummary>
 
-      <Divider />
+      {stepPosition && stepPosition === 2 && (
+        <>
+          <Divider />
 
-      <ItemSummary>
-        <Text fontWeight="400">Delivery estimation</Text>
-        <Text fontWeight="500" fontSize="16px" color="#1BD97B">
-          today by GO-SEND
-        </Text>
-      </ItemSummary>
+          <ItemSummary>
+            <Text fontWeight="400">Delivery estimation</Text>
+            <Text fontWeight="500" fontSize="16px" color="#1BD97B">
+              today by GO-SEND
+            </Text>
+          </ItemSummary>
 
-      <Divider />
+          <Divider />
 
-      <ItemSummary>
-        <Text fontWeight="400">Payment method</Text>
-        <Text fontWeight="500" fontSize="16px" color="#1BD97B">
-          Bank Transfer
-        </Text>
-      </ItemSummary>
+          <ItemSummary>
+            <Text fontWeight="400">Payment method</Text>
+            <Text fontWeight="500" fontSize="16px" color="#1BD97B">
+              Bank Transfer
+            </Text>
+          </ItemSummary>
+        </>
+      )}
 
       <CalculationSection>
         <ItemSummary direction="row">
@@ -72,11 +83,19 @@ const SummaryComponent = () => {
             500000
           </Text>
         </ItemSummary>
-        <Button>
-          <Text color="#fff" fontSize="18px" fontWeight="500">
-            Pay with e-Wallet
-          </Text>
-        </Button>
+        {stepPosition && stepPosition === 1 ? (
+          <Button onClick={() => setStepper(2)}>
+            <Text color="#fff" fontSize="18px" fontWeight="500">
+              Continue to Payment
+            </Text>
+          </Button>
+        ) : (
+          <Button>
+            <Text color="#fff" fontSize="18px" fontWeight="500">
+              Pay with e-Wallet
+            </Text>
+          </Button>
+        )}
       </CalculationSection>
     </SummarySection>
   );

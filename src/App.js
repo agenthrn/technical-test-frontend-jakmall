@@ -1,12 +1,10 @@
-import logo from "./logo.svg";
-// import "./App.css";
 import OrderPage from "./pages/OrderPage";
-
+import DataState from "./context/DataState";
 function App() {
   return (
-    <div className="App">
+    <DataState>
       <OrderPage />
-    </div>
+    </DataState>
   );
 }
 

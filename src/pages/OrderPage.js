@@ -1,20 +1,24 @@
-import React from "react";
+import React, { useEffect, useContext } from "react";
 import DeliveryComponent from "../components/DeliveryComponent";
 import FinalComponent from "../components/FinalComponent";
 import ShipmentPaymentComponent from "../components/ShipmentPaymentComponent";
 import StepperComponent from "../components/StepperComponent";
 import SummaryComponent from "../components/SummaryComponent";
 import { GlobalStyle, OrderPageBody } from "../Style";
-
+import DataContext from "../context/DataContext";
 const OrderPage = () => {
-  const stepPosition = 3;
+  const { getData, stepPosition } = useContext(DataContext);
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <>
       <GlobalStyle />
       <OrderPageBody>
         <StepperComponent />
-        {stepPosition === 1 ? (
+        {stepPosition && stepPosition === 1 ? (
           <DeliveryComponent />
         ) : stepPosition === 2 ? (
           <ShipmentPaymentComponent />

@@ -104,16 +104,28 @@ export const ItemStepper = styled.div`
 `;
 
 export const Input = styled.input`
-  border: 1px solid #cccccc;
+  border: 1px solid
+    ${(props) =>
+      props.status === "success"
+        ? "#1BD97B"
+        : props.status === "error"
+        ? "#FF8A00"
+        : "#ccc"};
   padding: 20px;
   box-sizing: border-box;
-  width: 100%;
+  width: ${(props) => props.width || "100%"};
   margin-bottom: 10px;
 `;
 
 export const TextArea = styled.textarea`
   resize: none;
-  border: 1px solid #cccccc;
+  border: 1px solid
+    ${(props) =>
+      props.status === "success"
+        ? "#1BD97B"
+        : props.status === "error"
+        ? "#FF8A00"
+        : "#ccc"};
   padding: 20px;
   box-sizing: border-box;
   width: 100%;
