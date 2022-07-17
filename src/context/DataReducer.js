@@ -5,6 +5,8 @@ const DataReducer = (state, action) => {
       return { ...state, ...payload };
     case "SET_STEPPER":
       return { ...state, stepPosition: payload };
+    case "SET_ORDER":
+      return { ...state, oderId: payload.oderId, status: payload.status };
     case "SET_SHIPMENT":
       return {
         ...state,

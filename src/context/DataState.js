@@ -20,7 +20,7 @@ const DataState = ({ children }) => {
     shipmentName: "",
     shipmentDuration: "",
     paymentName: "",
-    productCost: 500000
+    productCost: 500000,
   };
 
   // Dispatch the reducer
@@ -43,8 +43,34 @@ const DataState = ({ children }) => {
     data["stepPosition"] = payload;
     //set to localstorage here
     localStorage.setItem("deliveryData", JSON.stringify(data));
+    //if stepper position = 3, generate do order
+    if (payload === 3) {
+      order();
+    } else if (payload === "reset") {
+      localStorage.removeItem("deliveryData");
+      payload = 1;
+    }
     //dispatch
     dispatch({ type: "SET_STEPPER", payload });
+  };
+
+  const order = () => {
+    //generate random id
+    const char = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjklmnpqrstuvwxyz23456789";
+    let result = "";
+    const charLength = char.length;
+    for (let i = 0; i < 5; i++) {
+      result += char.charAt(Math.floor(Math.random() * charLength));
+    }
+
+    //get from localstorage here
+    const data = JSON.parse(localStorage.getItem("deliveryData"));
+    data["oderId"] = result;
+    data["status"] = "success";
+
+    const payload = { oderId: result, status: "success" };
+
+    dispatch({ type: "SET_ORDER", payload });
   };
 
   const setShipment = ({ ...payload }) => {

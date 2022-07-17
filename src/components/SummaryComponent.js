@@ -40,7 +40,7 @@ const SummaryComponent = () => {
         <Text>10 items purchased</Text>
       </ItemSummary>
 
-      {stepPosition && stepPosition === 2 && (
+      {stepPosition && stepPosition >= 2 && (
         <>
           {shipmentName && (
             <>
