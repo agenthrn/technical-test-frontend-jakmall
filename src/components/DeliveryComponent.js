@@ -56,7 +56,7 @@ const DeliveryComponent = () => {
 
   return (
     <Div>
-      <Item width="110px">
+      <Item cursor="pointer" width="110px">
         <span
           style={{ fontSize: "17px" }}
           className="material-symbols-outlined"
@@ -126,17 +126,29 @@ const DeliveryComponent = () => {
         </div>
         <div>
           <Input
+            disabled={!isDropshipper}
             type="text"
-            status={isDropshipper && errors.dropshipName ? "error" : "success"}
+            status={
+              isDropshipper
+                ? errors.dropshipName
+                  ? "error"
+                  : "success"
+                : "default"
+            }
             {...register("dropshipName", {
               required: isDropshipper ? true : false,
             })}
             placeholder="Dropshipper name"
           ></Input>
           <Input
+            disabled={!isDropshipper}
             type="text"
             status={
-              isDropshipper && errors.dropshipPhoneNumber ? "error" : "success"
+              isDropshipper
+                ? errors.dropshipPhoneNumber
+                  ? "error"
+                  : "success"
+                : "default"
             }
             {...register("dropshipPhoneNumber", {
               required: isDropshipper ? true : false,

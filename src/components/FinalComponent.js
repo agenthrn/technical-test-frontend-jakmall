@@ -32,7 +32,7 @@ const FinalComponent = () => {
       >
         Your order will be delivered {shipmentDuration} by {shipmentName}
       </Text>
-      <Item onClick={() => setStepper("reset")} width="160px">
+      <Item cursor="pointer" onClick={() => setStepper("reset")} width="160px">
         <span
           style={{ fontSize: "17px" }}
           className="material-symbols-outlined"

@@ -25,7 +25,7 @@ const SummaryComponent = () => {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [errorFormDelivery]);
 
   return (
     <SummarySection>

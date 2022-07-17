@@ -50,7 +50,7 @@ const ShipmentPaymentComponent = () => {
   };
   return (
     <Div>
-      <Item onClick={() => setStepper(1)} width="140px">
+      <Item cursor="pointer" onClick={() => setStepper(1)} width="140px">
         <span
           style={{ fontSize: "17px" }}
           className="material-symbols-outlined"

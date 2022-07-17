@@ -3,6 +3,7 @@ import styled, { css, createGlobalStyle } from "styled-components";
 export const GlobalStyle = createGlobalStyle`
   body {
     background: #FFFAE6;
+    margin: 0px !important;
   }
 `;
 
@@ -61,6 +62,7 @@ export const Div = styled.div`
 `;
 
 export const Item = styled.div`
+  cursor: ${(props) => props.cursor || "normal"};
   display: flex;
   gap: 12px;
   flex-direction: ${(props) => props.direction || "row"};
